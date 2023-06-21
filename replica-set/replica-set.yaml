@@ -1,0 +1,20 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: ns-nginx
+spec:
+  replicas: 2
+  selector:
+    matchExpressions:                             # these must match the labels
+      - {key: myname, operator: In, values: [Abhishek, Nitesh, Nitin]}
+      - {key: env, operator: NotIn, values: [production]}
+  template:
+    metadata:
+      name: testpod7
+      labels:
+        myname: Nitesh
+    spec:
+     containers:
+       - name: c00
+         image: nginx
+         command: ["/bin/bash", "-c", "while true; do echo welcome-in-this-world; sleep 5 ; done"]
