@@ -1,0 +1,1 @@
+# Nginx pod with claim
